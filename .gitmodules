@@ -1,0 +1,3 @@
+[submodule "restful/restful/Restful-webservices-docker"]
+	path = restful/restful/Restful-webservices-docker
+	url = https://github.com/OmerFarukKanmaz/Restful-webservices-docker
