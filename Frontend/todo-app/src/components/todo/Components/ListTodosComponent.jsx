@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { deleteTodoApi, retrieveAllTodosForUsernameApi } from "../api/TodoApiService"
 import { useAuth } from "./security/AuthContext"
+import { useNavigate } from "react-router-dom"
 
 export default function ListTodosComponent() {
     const today = new Date()
@@ -10,15 +11,17 @@ export default function ListTodosComponent() {
     const [message, setMessage] = useState(null)
     const authContext = useAuth()
     const username = authContext.username
-
+    const navigate = useNavigate()
     useEffect(
         () => refreshTodos(), []
     )
 
     function refreshTodos() {
+
         retrieveAllTodosForUsernameApi(username)
-            .then(response => setTodos(response.data))
+            .then(response => {setTodos(response.data)})
             .catch(error => console.log(error))
+
     }
 
     function deleteTodo(id) {
@@ -29,6 +32,10 @@ export default function ListTodosComponent() {
                     refreshTodos()
                 }
             )
+    }
+
+    function updateTodo(id) {
+        navigate(`/todo/${id}`)
     }
 
     return (
@@ -56,6 +63,7 @@ export default function ListTodosComponent() {
                                         {/*<td>{todo.targetDate.toDateString()}</td>*/}
                                         <td>{todo.targetDate.toString()}</td>
                                         <td><button className="btn btn-warning" onClick={() => deleteTodo(todo.id)}>Delete</button></td>
+                                        <td><button className="btn btn-success" onClick={() => updateTodo(todo.id)}>Delete</button></td>
                                     </tr>
                                 )
                             )
