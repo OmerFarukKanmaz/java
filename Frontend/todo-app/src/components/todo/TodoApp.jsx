@@ -39,11 +39,13 @@ export default function TodoApp() {
                         <ListTodosComponent />
                     </AuthenticatedRoute>}>
                     </Route>
-                    <Route path='todos/:id' element={
+
+                    <Route path='todo/:id' element={
                     <AuthenticatedRoute>
                         <TodoComponent />
                     </AuthenticatedRoute>}>
                     </Route>
+                    
                     <Route path='logout' element={
                     <AuthenticatedRoute>
                         <LogoutComponent />
